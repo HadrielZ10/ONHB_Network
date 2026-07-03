@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QUESTAO, ITEM, EDICAO, TIPO_QUESTAO, FASE
+from .models import QUESTAO, ITEM, EDICAO, TIPO_QUESTAO, FASE, PERIODO, DOCUMENTO, ANO_HISTORICO, TAG
 
 class ITEMInline(admin.TabularInline):
     """Permite visualizar e editar as alternativas direto dentro da página da Questão!"""
@@ -38,4 +38,28 @@ class QuestaoAdmin(admin.ModelAdmin):
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('id_item', 'identificador', 'pontuacao', 'id_questao')
     list_filter = ('pontuacao', 'identificador') # Filtra por itens de 4 pontos, 2 pontos, ou pela letra (A, B...)
-    search_fields = ('texto',) # <-- Corrigido aqui: removido os pontos extras
+    search_fields = ('texto',)
+    
+@admin.register(PERIODO)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('id_periodo', 'periodo_nome', 'seculo')
+    
+    search_fields = ('periodo_nome', 'seculo')
+
+@admin.register(DOCUMENTO)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('id_documento', 'nome_documento', 'tipo_documento')
+    
+    search_fields = ( 'nome_documento', 'tipo_documento')
+
+@admin.register(ANO_HISTORICO)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('id_ano', 'ano')
+    
+    search_fields = ('ano',)
+
+@admin.register(TAG)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('id_tag', 'tag_nome')
+    
+    search_fields = ('tag_nome',)

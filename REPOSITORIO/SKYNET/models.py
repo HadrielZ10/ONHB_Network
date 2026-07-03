@@ -68,7 +68,7 @@ class ITEM(models.Model):
 
     identificador = models.CharField(verbose_name="Identificador")
 
-    enunciado_item = models.TextField(verbose_name="Enunciado do Item")
+    texto = models.TextField(verbose_name="Enunciado do Item")
 
     id_questao = models.ForeignKey(
         QUESTAO,
@@ -78,3 +78,43 @@ class ITEM(models.Model):
 
 def __str__(self):
     return f"{self.pontuacao} - {self.identificador} - {self.texto}"
+
+class DOCUMENTO(models.Model):
+
+    id_documento = models.AutoField(primary_key=True)
+
+    tipo_documento = models.CharField(max_length=100,verbose_name="Tipo de Documento")
+
+    nome_documento = models.CharField(max_length=100,verbose_name="Nome do Documento")
+
+def __str__(self):
+    return f"{self.tipo_documento} - {self.nome_documento}"
+
+class PERIODO(models.Model):
+
+    id_periodo = models.AutoField(primary_key=True)
+
+    periodo_nome = models.CharField(max_length=100,verbose_name="Nome do Periodo")
+
+    seculo = models.CharField(max_length=100,verbose_name="Seculo")
+
+def __str__(self):
+    return f"{self.seculo} - {self.periodo_nome}"
+
+class TAG(models.Model):
+
+    id_tag = models.AutoField(primary_key=True)
+
+    tag_nome = models.CharField(max_length=100,verbose_name="Nome da Tag")
+
+def __str__(self):
+    return f"{self.tag_nome}"
+
+class ANO_HISTORICO(models.Model):
+
+    id_ano = models.AutoField(primary_key=True)
+
+    ano = models.IntegerField(verbose_name="Ano")
+
+def __str__(self):
+    return f"{self.ano}"

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SKYNET - Questão {{ questao.num_questao }}</title>
+</head>
+<body>
+
+    <header>
+        <h1>Plataforma SKYNET</h1>
+        <p>
+            <strong>Edição:</strong> {{ questao.id_fase.id_edicao.num_edicao }} | 
+            <strong>Fase:</strong> {{ questao.id_fase.num_fase }} | 
+            <strong>Tipo:</strong> {{ questao.id_tipo_questao.tipo_nome }}
+        </p>
+    </header>
+
+    <hr>
+
+    <main>
+        <section class="bloco-enunciado">
+            <h2>Questão {{ questao.num_questao }}</h2>
+            <p style="font-size: 1.1em; line-height: 1.6; background-color: #f9f9f9; padding: 15px; border-left: 5px solid #007bff;">
+                {{ questao.enunciado }}
+            </p>
+        </section>
+
+        <section class="bloco-alternativas" style="margin-top: 30px;">
+            <h3>Alternativas / Itens cadastrados:</h3>
+            
+            {% for alternativa in alternativas %}
+                <div class="card-alternativa" style="margin-bottom: 15px; padding: 12px; border: 1px solid #ddd;">
+                    <p>
+                        <strong>Letra/ID:</strong> {{ alternativa.identificador }} | 
+                        <strong>Pontuação:</strong> {{ alternativa.pontuacao }} pontos
+                    </p>
+                    <p><strong>Texto da Alternativa:</strong> {{ alternativa.texto }}</p>
+                </div>
+            {% empty %}
+                <p style="color: #ff0000;">Nenhuma alternativa (ITEM) populada para esta questão ainda.</p>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer style="margin-top: 30px;">
+        <a href="{% url 'listar_questoes' questao.id_fase.id_fase %}">← Voltar para as Questões desta Fase</a>
+    </footer>
+
+</body>
+</html>
